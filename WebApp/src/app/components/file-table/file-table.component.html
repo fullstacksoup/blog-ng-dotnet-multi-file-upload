@@ -1,0 +1,26 @@
+<div class="card" >
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Label</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let img of imagesArr">
+          <tr>
+            <td>
+               <image-container [imgMimeType]="img.Images[0].MimeType" [imgData]="img.Images"></image-container>
+
+            </td>
+            <td>{{img.Title}}</td>
+
+            <td><button type="button" class="btn btn-danger" (click)="onDeleteImage(img.Id)">Remove</button> </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
