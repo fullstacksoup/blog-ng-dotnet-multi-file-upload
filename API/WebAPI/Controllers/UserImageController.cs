@@ -201,6 +201,8 @@ namespace FileUploadAPI.Controllers
                         {
                             file.Delete();
                         }
+                        var imageRecord = db.ProductImages.Find(images[i].Id);
+                        db.ProductImages.Remove(imageRecord);
                     }
                     
                     // Remove the Directory
