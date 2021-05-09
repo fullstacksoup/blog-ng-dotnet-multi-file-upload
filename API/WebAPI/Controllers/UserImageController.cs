@@ -173,7 +173,52 @@ namespace FileUploadAPI.Controllers
             }
         }
 
+        //********************************************************************************
+        // D E L E T E   P R O D U C T   I M A G E S    A N D    P R O D U C T   R E C O R D
+        //********************************************************************************
 
+        [HttpDelete]
+        [Route("remove/{id}")]
+        public object renoveProduct(int id)
+        {                     
+            try
+            {
+                var ctx = HttpContext.Current;
+                var root = ctx.Server.MapPath("~/Content");
+                var provider = new MultipartFormDataStreamProvider(root);
+
+                using (FullStackSoupEntities db = new FullStackSoupEntities())
+                {
+                    var product = db.Products.Find(id);
+                    var images = db.ProductImages.Where(col => col.ProductId == id).ToArray();
+                    
+                    // Remove Each File
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        var filepath = root + "\\images\\" + images[i].ImagePath;
+                        FileInfo file = new FileInfo(filepath);
+                        if (file.Exists)//check file exsit or not  
+                        {
+                            file.Delete();
+                        }
+                    }
+                    
+                    // Remove the Directory
+                    var dirpath = root + "\\images\\" + product.Id;
+                    Directory.Delete(dirpath);
+
+                    // Remove the parent record
+                    db.Products.Remove(product);
+                    db.SaveChanges();
+                    return Ok("Successfully Deleted Record and Images");
+                }
+
+            }
+            catch (System.Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
 

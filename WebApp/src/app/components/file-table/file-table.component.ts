@@ -41,8 +41,8 @@ export class FileTableComponent implements OnInit, OnDestroy {
 
   }
 
-  onDeleteImage(id: number): void {
-    this.subs.add(this.fileSVC.removeImage(id)
+  onDeleteProduct(id: number): void {
+    this.subs.add(this.fileSVC.removeProduct(id)
     .subscribe((data) => {
         console.log('Delete Result: ', data);
         this.onLoadData();

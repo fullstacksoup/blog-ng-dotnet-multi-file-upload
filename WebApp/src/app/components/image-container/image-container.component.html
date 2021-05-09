@@ -1,5 +1,11 @@
 
 <ng-container *ngFor="let img of imgData">
 
-<img [src]="'http://localhost:60408/Content/images/' + img.ImagePath"  style="height: 100px; width: auto;">
+  <div class="container">
+    <img [src]="'http://localhost:60408/Content/images/' + img.ImagePath" class="image">
+
+    <div class="overlay"></div>
+    <div class="button"><a href="#" (click)="deleteImage()"> x </a></div>
+  </div>
+
 </ng-container>

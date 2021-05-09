@@ -62,10 +62,10 @@ export class ImageFileService {
   }
 
 
-  removeImage(id: number): Observable<ResultsObj> {
-    const URL = `${environment.baseUrl}/api/product/removeimage/${id}`;
+  removeProduct(id: number): Observable<ResultsObj> {
+    const URL = `${environment.baseUrl}/api/product/remove/${id}`;
     console.log(URL);
-    return this.http.get(URL);
+    return this.http.delete(URL);
   }
 
 }
