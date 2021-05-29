@@ -11,17 +11,12 @@ interface ResultsObj {
 @Injectable({
   providedIn: 'root'
 })
+
 export class ImageFileService {
 
   constructor(private http: HttpClient) { }
 
-
-  // ********************************************************** */
-  // * A D D   I M A G E   T O   D A T A B A S E  (Local MDF file under App_Data folder in Web API)
-  // ?
-  // ********************************************************** */
-
-  addImageToDB(fileForm: any, files: any): string {
+  addProductImages(fileForm: any, files: any): string {
     const URL = `${environment.baseUrl}/api/product/add`;
 
     const formData = new FormData();
@@ -57,14 +52,14 @@ export class ImageFileService {
 
   getImages(): Observable<ResultsObj> {
     const URL = `${environment.baseUrl}/api/product/get`;
-    console.log(URL);
+    // console.log(URL);
     return this.http.get(URL);
   }
 
 
   removeProduct(id: number): Observable<ResultsObj> {
     const URL = `${environment.baseUrl}/api/product/remove/${id}`;
-    console.log(URL);
+    // console.log(URL);
     return this.http.delete(URL);
   }
 

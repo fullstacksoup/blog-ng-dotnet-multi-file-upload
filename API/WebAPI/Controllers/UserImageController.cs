@@ -45,7 +45,7 @@ namespace FileUploadAPI.Controllers
         {
             try
             {
-                using (FullStackSoupEntities db = new FullStackSoupEntities())
+                using (MultiFileUploadDBEntities db = new MultiFileUploadDBEntities())
                 {
 
                     var ProductJSONObj = new ProductData { };
@@ -95,7 +95,7 @@ namespace FileUploadAPI.Controllers
             DateTime today = DateTime.Today;
             try
             {
-                using (FullStackSoupEntities db = new FullStackSoupEntities())
+                using (MultiFileUploadDBEntities db = new MultiFileUploadDBEntities())
                 {
                     // Read the form data.
                     await Request.Content.ReadAsMultipartAsync(provider);
@@ -118,6 +118,7 @@ namespace FileUploadAPI.Controllers
                         // Get File Name
                         var fileName = file.Headers.ContentDisposition.FileName.Replace("\"", string.Empty);
                         string mimeType = file.Headers.ContentType.MediaType;
+
                         ProductImage ProductImageForm = new ProductImage();
                         Guid g = Guid.NewGuid();
 
@@ -187,7 +188,7 @@ namespace FileUploadAPI.Controllers
                 var root = ctx.Server.MapPath("~/Content");
                 var provider = new MultipartFormDataStreamProvider(root);
 
-                using (FullStackSoupEntities db = new FullStackSoupEntities())
+                using (MultiFileUploadDBEntities db = new MultiFileUploadDBEntities())
                 {
                     var product = db.Products.Find(id);
                     var images = db.ProductImages.Where(col => col.ProductId == id).ToArray();

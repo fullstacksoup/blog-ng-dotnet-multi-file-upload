@@ -5,46 +5,36 @@
         <h5>Upload Image</h5>
         <form class="post-form" method="POST" (ngSubmit)="onSubmit($event)" [formGroup]="imageForm" >
 
-          <div class="row">
-            <div class="col-6">
+        <div class="row">
+          <div class="col-12">
+              <label>Parent Table ID</label>
+              <input type="text" class="form-control" placeholder="Title" name="Title" formControlName="Title">
+            </div>
+        </div>
 
+        <div class="row mt-3">
+          <div class="col-12">
+            <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+              <ngx-dropzone-label>
+                <div>
+                  <h2>Dropzone</h2>
+                  <h5>Drag & Drop Files Here</h5>
+                </div>
+              </ngx-dropzone-label>
+              <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+              </ngx-dropzone-image-preview>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12">
-                <label>Parent Table ID</label>
-                <input type="text" class="form-control" placeholder="Title" name="Title" formControlName="Title">
-              </div>
+        </div>
+
+       <div class="row mt-3">
+          <div class="col">
+              <button class="btn btn-primary" type="submit" [disabled]="!imageForm.valid || files.length == 0">Save Image & Title</button>
           </div>
-
-
-          <div class="row mt-3">
-            <div class="col-12">
-
-              <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
-                <ngx-dropzone-label>
-                  <div>
-                    <h2>Dropzone</h2>
-                    <h5>Drag & Drop Files Here</h5>
-                  </div>
-                </ngx-dropzone-label>
-                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)" >
-                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                </ngx-dropzone-image-preview>
-              </div>
-
-            </div>
-          </div>
-
-          <div class="row mt-3">
-            <div class="col">
-                <button class="btn btn-primary" type="submit" [disabled]="!imageForm.valid">Save Image & Title</button>
-            </div>
-          </div>
-        </form>
       </div>
-
-
+    </form>
+  </div>
 </div>
 
 
